@@ -6,6 +6,8 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -33,7 +35,7 @@ public class BookTable {
 	@DecimalMin(value = "0", inclusive = true, message = "Provide value greater than or equal to zero")
 	private Integer totalKidsNonVegCount;
 
-	//@Pattern(regexp = "\\d{4}-\\d{2}-\\d{2}", message = "Date must be in the format yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate bookingDate;
 	private Double totalBillAmount;
 

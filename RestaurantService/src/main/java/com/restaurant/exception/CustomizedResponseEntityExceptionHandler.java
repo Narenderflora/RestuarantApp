@@ -14,10 +14,14 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @RestControllerAdvice
 public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
-	
+	@ExceptionHandler(Exception.class)
 	public final ResponseEntity<Object> handleAllExceptions(Exception ex, WebRequest request) {
-
-		return null;
+		ExceptionResponse exceptionResponse = new ExceptionResponse();
+		exceptionResponse.setMessage(ex.getMessage());
+		exceptionResponse.setDetails(ex.getMessage());
+		exceptionResponse.setHttpCodeMessage(HttpStatus.BAD_REQUEST.name());
+		exceptionResponse.setTimestamp(LocalDate.now());
+		return new ResponseEntity<Object>(exceptionResponse, HttpStatus.BAD_REQUEST);
 	}
 
 	@ExceptionHandler(BookTableInvalidException.class)
